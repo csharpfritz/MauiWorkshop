@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyNewsReader.MainPage"
+						 xmlns:model="clr-namespace:MyNewsReader.Models"
+						 xmlns:viewmodel="clr-namespace:MyNewsReader.ViewModels"
+						 xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+						 x:DataType="viewmodel:NewsFeedListViewModel"
+						 Title="My News Feeds">
+
+	<ContentPage.MaximumWidthRequest>
+		<OnIdiom x:TypeArguments="x:Double">
+			<OnIdiom.Phone>400</OnIdiom.Phone>
+			<OnIdiom.Tablet>600</OnIdiom.Tablet>
+			<OnIdiom.Desktop>800</OnIdiom.Desktop>
+		</OnIdiom>
+	</ContentPage.MaximumWidthRequest>
+
+	<Grid ColumnDefinitions="*,*" ColumnSpacing="5"
+				RowDefinitions="*,Auto" RowSpacing="0"> 
+
+
+		<!--<HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+			<Button Text="Add New"></Button>
+			<Button Text="Find"></Button>
+		</HorizontalStackLayout>-->
+
+		<CollectionView 
+			Grid.ColumnSpan="2"
+			ItemsSource="{Binding NewsFeeds}"
+			SelectionMode="None">
+			<!--<CollectionView.ItemsSource>
+				<x:Array Type="{x:Type model:NewsFeed}">
+					<model:NewsFeed 
+						Title="Microsoft Dev Blogs" 
+						SourceUrl="https://devblogs.microsoft.com/landingpage/" />
+					<model:NewsFeed 
+						Title="Fritz's Blog" 
+						SourceUrl="https://jeffreyfritz.com/feed" />
+				</x:Array>
+			</CollectionView.ItemsSource>-->
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="model:NewsFeed">
+					<VerticalStackLayout Padding="15">
+							<VerticalStackLayout.GestureRecognizers>
+								<TapGestureRecognizer 
+									Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewsFeedListViewModel}}, Path=GoToNewsFeedCommand}" 
+									CommandParameter="{Binding .}"/>
+							</VerticalStackLayout.GestureRecognizers>
+							<Label Text="{Binding Title}" StyleClass="FeedTitle" />
+							<Label Text="{Binding SourceUrl}" />
+					</VerticalStackLayout>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<Button Text="Add Feed" Grid.Row="1" Grid.Column="0"
+										Command="{Binding AddFeedCommand}" />
+		<Button Text="Refresh Feed List" Grid.Row="1" Grid.Column="1"
+										Command="{Binding GetFeedsCommand}" />
+
+	</Grid>
+
+</ContentPage>

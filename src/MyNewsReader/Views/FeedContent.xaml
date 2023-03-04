@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+             x:Class="MyNewsReader.FeedContent"
+						 xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:viewmodel="clr-namespace:MyNewsReader.ViewModels"
+						 xmlns:model="clr-namespace:MyNewsReader.Models"
+						 x:DataType="viewmodel:NewsFeedViewModel"
+             Title="{Binding Feed.Title}">
+
+	<StackLayout>
+
+		<StackLayout Orientation="Horizontal" Padding="10,10,10,10">
+			<Image Source="{Binding Content.channel.image.url}" IsVisible="{Binding Content.channel.ImageIsVisible}" WidthRequest="50" HeightRequest="50" />
+			<StackLayout Orientation="Vertical" Padding="10,0,0,0">
+				<Label Text="{Binding Content.channel.title}" FontSize="Large" />
+				<Label Text="{Binding Content.channel.description}" FontSize="Small" />
+			</StackLayout>
+		</StackLayout>
+		<CollectionView ItemsSource="{Binding Content.channel.item}" 
+			SelectionMode="None" VerticalOptions="CenterAndExpand">
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="model:rssChannelItem">
+						<VerticalStackLayout Padding="15">
+							<VerticalStackLayout.GestureRecognizers>
+								<TapGestureRecognizer 
+										Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewsFeedViewModel}}, Path=GoToContentCommand}" 
+										CommandParameter="{Binding .}"/>
+							</VerticalStackLayout.GestureRecognizers>
+
+						<Label Text="{Binding title}" StyleClass="Title" />
+							<Label Text="{Binding PublicationDate, StringFormat='{0:F}'}" />
+						</VerticalStackLayout>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+
+		<ActivityIndicator 
+			IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" 
+			VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+	</StackLayout>
+
+</ContentPage>
