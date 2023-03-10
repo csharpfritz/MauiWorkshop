@@ -81,11 +81,6 @@ Add the following into the MainPage.xaml's `ContentPage`:
 			</DataTemplate>
 		</CollectionView.ItemTemplate>
 	</CollectionView>
-
-            </HorizontalStackLayout>
-        </DataTemplate>
-    </CollectionView.ItemTemplate>
-</CollectionView>
 ```
 
 
