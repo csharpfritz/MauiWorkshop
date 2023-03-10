@@ -5,6 +5,7 @@ We've got the idea for our application, a News Reader, but how do we assemble th
 ## Layouts
 
 ![Layouts Available in .NET MAUI](img/layouts.png)
+
 Layouts diagram courtesy of [Microsoft docs](https://learn.microsoft.com/dotnet/maui/user-interface/layouts/?view=net-maui-7.0)
 
 .NET Multi-platform App UI (.NET MAUI) layout classes allow you to arrange and group UI controls in your application. Choosing a layout class requires knowledge of how the layout positions its child elements, and how the layout sizes its child elements. In addition, it may be necessary to nest layouts to create your desired layout.
