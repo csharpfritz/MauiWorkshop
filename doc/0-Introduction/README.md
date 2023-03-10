@@ -80,7 +80,7 @@ Code is compiled, linked and provided as an .APK that the Google Play store repa
 
 ### Open Solution in Visual Studio
 
-1. Open **Part 1 - Displaying Data/MyNewsReader.sln**
+1. Open **Part 1 - 0-Introduction/src/MyNewsReader.sln**
 
 This MyNewsReader contains 1 project:
 
